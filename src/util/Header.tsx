@@ -4,7 +4,30 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import FaceIcon from '@mui/icons-material/Face';
 import { Link } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import { createTheme, Grid } from '@mui/material';
+import { blue } from '@mui/material/colors';
+
+
+declare module '@mui/material/styles' {
+  interface PaletteColor {
+    darker?: string;
+  }
+
+  interface SimplePaletteColorOptions {
+    darker?: string;
+  }
+}
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: blue[100],
+      main: blue[500],
+      dark: blue[700],
+      darker: blue[900],
+    },
+  },
+});
 
 interface HeaderProps {
   title: string;
@@ -13,7 +36,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <AppBar position="static">
-      <Grid container lg={10} justifyContent='left'>
+      <Grid container lg={10} justifyContent='left' spacing={1}>
         <Grid item lg={2} justifyContent='start'>
             <Typography
               variant="h4"
@@ -36,7 +59,10 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           <Button
             component = {Link}
             to = '/'
-            sx={{ my: 1, color: 'white', display: 'flex', fontFamily:'Lato', textTransform: 'none' }}
+            sx={{ my: 1, color: 'white', backgroundColor: 'primary.light',
+              '&:hover': {
+                backgroundColor: 'darkblue',
+              }, display: 'flex', fontFamily:'Lato', textTransform: 'none' }}
           >
             Real-Time
           </Button>
@@ -45,7 +71,10 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           <Button
             component = {Link}
             to = '/image-detect'
-            sx={{ my: 1, color: 'white', display: 'flex', fontFamily:'Lato', textTransform: 'none' }}
+            sx={{my: 1, color: 'white', backgroundColor: 'primary.light',
+              '&:hover': {
+                backgroundColor: 'darkblue',
+              }, display: 'flex', fontFamily:'Lato', textTransform: 'none'}}
           >
             Image
           </Button>
@@ -54,7 +83,10 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           <Button
             component = {Link}
             to = '/train-model'
-            sx={{ my: 1, color: 'white', display: 'flex', fontFamily:'Lato', textTransform: 'none' }}
+            sx={{ my: 1, color: 'white', backgroundColor: 'primary.light',
+              '&:hover': {
+                backgroundColor: 'darkblue',
+              }, display: 'flex', fontFamily:'Lato', textTransform: 'none' }}
           >
             Train AI
           </Button>
